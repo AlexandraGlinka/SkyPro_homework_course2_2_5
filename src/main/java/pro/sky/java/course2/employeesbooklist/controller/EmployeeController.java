@@ -19,7 +19,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/add")
-    public String addEmployee(@RequestParam("firtName") String firstName,
+    public String addEmployee(@RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName) {
         Employee employee = new Employee(firstName, lastName);
         try {
