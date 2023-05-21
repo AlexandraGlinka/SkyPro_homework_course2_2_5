@@ -29,13 +29,15 @@ public class EmployeeController {
                                 @RequestParam String lastName) {
         Employee employee = new Employee(firstName, lastName);
         try {
-            employeeService.add(firstName, lastName);
+            return employeeService.add(firstName, lastName);
         } catch (EmployeeStorageIsFullException e) {
             System.out.println("Превышен лимит сотрудников");
+            throw e;
         } catch (EmployeeAlreadyAddedException e) {
             System.out.println("Такой сотрудник уже существует");
+            throw e;
         }
-        return employeeService.add(firstName, lastName);
+        // return employeeService.add(firstName, lastName);
     }
 
     @GetMapping(path = "/remove")
@@ -43,11 +45,12 @@ public class EmployeeController {
                                    @RequestParam String lastName) {
         Employee employee = new Employee(firstName, lastName);
         try {
-            employeeService.remove(firstName, lastName);
+            return employeeService.remove(firstName, lastName);
         } catch (EmployeeNotFoundException e) {
             System.out.println("Сотрудник не найден");
+            throw e;
         }
-        return employeeService.remove(firstName, lastName);
+        //return employeeService.remove(firstName, lastName);
     }
 
     @GetMapping(path = "/find")
@@ -55,11 +58,12 @@ public class EmployeeController {
                                  @RequestParam String lastName) {
         Employee employee = new Employee(firstName, lastName);
         try {
-            employeeService.find(firstName, lastName);
+            return employeeService.find(firstName, lastName);
         } catch (EmployeeNotFoundException e) {
             System.out.println("Сотрудник не найден");
+            throw e;
         }
-        return employeeService.find(firstName, lastName);
+        //return employeeService.find(firstName, lastName);
     }
 
     @GetMapping
